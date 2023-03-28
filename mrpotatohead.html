@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UFT-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mr. Potato Game</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <h1>Mr. Potato Head</h1><br>
+    <h3>Drag and drop his facial features and download the image!</h3><br>
+    <style>
+        @media (max-width: 768px) {
+            .body-img {
+                padding-top: 10px;
+                margin: 10px;
+                border: none;
+            }
+
+            #draggable-nose,
+            #draggable-mouth,
+            #draggable-eyes,
+            #draggable-hat {
+                float: none;
+                display: block;
+                margin: 0 auto;
+                text-align: center;
+            }
+
+            #draggable-mouth {
+                height: 100px;
+                width: 200px;
+            }
+
+            #draggable-eyes {
+                height: 80px;
+                width: 160px;
+            }
+
+            #draggable-hat {
+                height: 100px;
+                width: 200px;
+            }
+
+            .parts {
+                float: none;
+                display: block;
+                margin: 0 auto;
+                text-align: center;
+            }
+
+            .img-position {
+                padding: 4%;
+            }
+
+            h3 {
+                font-size: 1.2rem;
+                padding: 2px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="capture" style="background: plum">
+        <img src="body2.png" height="550px" width="400px">
+
+        <div id="draggable-nose">
+            <img src=nose.png>
+        </div>
+
+        <div id="draggable-mouth">
+            <img src="mouth.png" height="150px" width="300px">
+        </div>
+        <div id="draggable-eyes">
+            <img src="eyes.png" height="100px" width="200px">
+        </div>
+        <div id="draggable-hat">
+            <img src="hat.png" height="200px" width="400px">
+        </div>
+    </div>
+
+    <button id="downloadimg">Download Image</button>
+    <script>
+        $(function nos() {
+            $("#draggable-nose").draggable();
+        });
+        $(function mout() {
+            $("#draggable-mouth").draggable();
+        });
+        $(function eye() {
+            $("#draggable-eyes").draggable();
+        });
+        $(function ha() {
+            $("#draggable-hat").draggable();
+        });
+
+        function capture() {
+            html2canvas(document.querySelector('#capture')).then(canvas => {
+                document.body.appendChild(canvas)
+                return canvas
+            })
+                .then(canvas => {
+                    const a = document.createElement('a')
+                    a.setAttribute('download', 'mrPotatoHead.png')
+                    a.setAttribute('href', (canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream')))
+                    a.click()
+                    canvas.remove()
+                })
+        }
+
+        const downloadimg = document.querySelector('#downloadimg')
+        downloadimg.addEventListener('click', capture)
+
+    </script>
+</body>
+
+</html>
